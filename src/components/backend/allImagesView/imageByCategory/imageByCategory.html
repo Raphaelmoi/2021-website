@@ -1,0 +1,84 @@
+<section class="myBody mainContainer">
+  <div class="head">
+    <!-- btn back with no update -->
+    <router-link v-if="!dataToSendToServer" to="/allImages" class="barBtn">
+      <i class="fas fa-arrow-circle-left backFa"></i>
+      Retour
+    </router-link>
+    <a v-if="dataToSendToServer" @click="areYouSure()" class="barBtn">
+      <i class="fas fa-arrow-circle-left backFa"></i>
+      Quitter
+    </a>
+    <!-- btn back with update -->
+    <a v-if="dataToSendToServer" class="barBtn" @click="updateThisDiapo">
+      <i class="fas fa-check-circle backFa"></i>
+      Validez les modifs
+    </a>
+
+    <!-- title of diaporama -->
+    <h1 v-if="!modifyTitle">
+      {{ $store.state.keywordTable[currentView].keywords }}
+      <i
+        class="fas fa-pen"
+        @click="modifyTitle = !modifyTitle; dataToSendToServer=true"
+      ></i>
+    </h1>
+    <!-- input to modify title -->
+    <input
+      class="titleInput"
+      v-if="modifyTitle"
+      v-model="$store.state.keywordTable[currentView].keywords"
+      value="$store.state.keywordTable[currentView].keywords"
+    />
+    <!-- change the view type (grid or alone) -->
+    <div>
+      <a :class="category==0 ? 'active' : ''" @click="category = 0">
+        <i class="fas fa-th fa-2x"></i>
+      </a>
+      <a :class="category==1 ? 'active' : ''" @click="category = 1">
+        <i class="fas fa-image fa-2x"></i>
+      </a>
+    </div>
+    <!-- panneau suppression du diaporama -->
+    <div class="btnSettings">
+      <a v-on:click="settingPanel = !settingPanel">
+        <i class="fas fa-trash fa-2x"></i>
+      </a>
+      <div v-bind:class="settingPanel ? 'panel' : 'hide'">
+        <div class="arrow-up"></div>
+        <a style="color:orangered; cursor: pointer;" @click="deleteDiaporama">
+          <i class="fas fa-trash"></i>
+          Supprimez le diaporama
+          <span style="font-weight: bold;"
+            >"{{ $store.state.keywordTable[currentView].keywords }}"</span
+          >
+        </a>
+        <a
+          style="color:cadetblue; cursor: pointer;"
+          @click="settingPanel = !settingPanel"
+          >Annuler</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <listimgVueComp
+    :currentDiapo="currentView"
+    v-if="category == 0"
+    v-on:setCategory="category=1"
+    v-on:setCurrentImg="setCurrentImgFromComponent"
+    v-on:ismodified="dataToSendToServer=true"
+  >
+  </listimgVueComp>
+
+  <oneImgComp
+    :currentDiapo="currentView"
+    v-if="category == 1"
+    v-on:setCategory="category=0"
+    :listStatus="dataToSendToServer"
+    :currentImage.sync="currentImg"
+    v-on:ismodified="dataToSendToServer=true"
+    v-on:reloadKeywordTable="$store.dispatch('loadData')"
+  >
+  </oneImgComp>
+</section>

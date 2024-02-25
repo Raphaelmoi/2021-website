@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\assets\\images",
+    "\\src\\components",
+    "\\src\\components\\backend",
+    "\\src\\components\\backend\\allImagesView",
+    "\\src\\components\\backend\\newImage",
+    "\\src\\php",
+    "\\src\\public",
+    "\\src\\store"
+  ],
+  "SelectedNode": "\\src\\main.js",
+  "PreviewInSolutionExplorer": false
+}

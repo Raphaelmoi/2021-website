@@ -1,0 +1,226 @@
+/* section {
+  z-index: -2;
+} */
+.NI {
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  cursor: pointer;
+}
+
+.uploaderImage {
+  position: absolute;
+  padding: 2rem;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+}
+
+.uploaderImage label span {
+  color: #333;
+  width: 40vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.uploaderImage label:hover span {
+  transition: all 0.9s ease;
+  letter-spacing: 2px;
+  background: #333;
+  color: white;
+}
+
+.uploaderImage span {
+  text-transform: uppercase;
+  border: 1px #888 solid;
+  padding: 1.5rem 4rem;
+  border-radius: 50px;
+  transition: all 0.9s ease;
+  text-align: center;
+}
+
+.addkeyword {
+  position: absolute;
+  /* margin: 10px; */
+  top: 50px;
+  right: 170px;
+  left: unset;
+  width: 300px;
+  background-color: whitesmoke;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  z-index: 1;
+}
+
+.closePanel {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.addkeyword > div {
+  display: flex;
+  align-items: center;
+}
+
+.addkeyword label {
+  color: black;
+  margin-right: 1rem;
+}
+
+.addkeyword input {
+  padding-left: 0.4rem;
+  margin-right: 8px;
+  outline: none;
+}
+
+.submit {
+  color: black;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* color: white; */
+  cursor: pointer;
+}
+
+.addkeyword input {
+  height: 30px;
+  border-radius: 8px;
+}
+
+.containerImage {
+  width: 60vw;
+  margin: auto;
+  /* background-color: teal; */
+  /* z-index: -1; */
+  position: absolute;
+  transform: translate(-50%, -50%);
+  /* margin-left: 20vw; */
+}
+
+.arrowNavItem {
+  position: absolute;
+  transition: all 0.8s ease;
+  cursor: pointer;
+}
+
+.arrowNavItem:hover {
+  color: #00867d;
+  text-shadow: 0px 0px 20px white;
+}
+
+.paginationNavItem {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  position: absolute;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 1s ease;
+  border: 2px #333 solid;
+}
+
+.paginationNavItem:hover {
+  background-color: #00867d99;
+  transition: all 1s ease;
+}
+
+.keywordRitem1 {
+  top: 0vh;
+  right: 2vw;
+}
+
+.keywordRitem2 {
+  top: 28vh;
+  right: 1vw;
+}
+
+.hide {
+  display: none;
+}
+
+.navFa {
+  font-size: 1.4em;
+  background-color: rgb(235, 141, 128);
+  border-radius: 50%;
+  margin-right: 1rem;
+  width: 33px;
+  height: 36px;
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deletedItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 50, 50, 0.3);
+  font-size: 8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* .fa-plus {
+  border-radius: 50%;
+  padding: 7px;
+  margin: 4px;
+  height: 1em;
+  color: white;
+  cursor: pointer;
+}
+
+.fa-plus:hover {
+} */
+
+.nokeyword {
+  position: absolute;
+  background-color: #ffffff88;
+  width: 70vw;
+  height: 80vh;
+  color: black;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 5;
+}
+
+.myButton {
+  text-transform: uppercase;
+  border: 1px #fff solid;
+  padding: 1.5rem 2rem;
+  border-radius: 50px;
+  margin-top: 2rem;
+  transition: all 0.9s ease;
+  cursor: pointer;
+  background: #fff;
+}
+.myButton:hover {
+  box-shadow: 5px 3px 12px 0 #666;
+  transition: all 0.9s ease;
+  letter-spacing: 2px;
+}

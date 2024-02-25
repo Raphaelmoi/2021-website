@@ -1,0 +1,144 @@
+<section class="myBody NI">
+  <div class="giantCircle">
+    <div class="centerCircle">
+      <div :class="files.length == 0? 'uploaderImage' : 'navItem item1'">
+        <input
+          type="file"
+          name="file"
+          id="file"
+          ref="myFiles"
+          class="inputfile"
+          @change="uploadImgOnFront"
+          accept="image/png, image/jpeg"
+          multiple="multiple"
+        />
+
+        <label for="file" v-if="files.length == 0">
+          <span>Ajouter des images</span>
+        </label>
+        <label for="file" v-else>Importer + d'image(s)</label>
+      </div>
+
+      <div
+        class="nokeyword"
+        v-if="$store.state.keywordTable.length == 0 && files.length !== 0"
+      >
+        Pour commmencer,<br />
+        ajoutez un diaporama en cliquant ci-dessous
+        <br />
+        <a class="myButton" @click="onClickAddKeyword = !onClickAddKeyword">
+          Ajouter un diaporama
+        </a>
+      </div>
+      <div class="nokeyword" v-if="files && isAlreadyOnDb()">
+        Cette image à déja été télecharger
+        <br />
+        Elle ne sera donc pa ré-envoyée <br />
+        Vous pouvez modifier toutes les données à son sujet à cette page (lien)
+        en la modifiant dans un diaporama la contennant
+      </div>
+
+      <currentImgComponent
+        v-for="(item, indexImg) in itemsBox"
+        :key="currentImg+indexImg"
+        :class="currentImg==indexImg ? 'containerImage' : 'hide'"
+        :isDelete="item.fileIsDeleted"
+        :imgUrl="item.imageUrl"
+        :currentIndex="indexImg"
+        :selectKW.sync="item.keyword"
+        :legende.sync="item.legend"
+        :desc.sync="item.description"
+        :addKW.sync="onClickAddKeyword"
+      >
+      </currentImgComponent>
+
+      <a @click="confirmBeforeLeave" class="navItem backBtn retourBtn">
+        <i class="fas fa-arrow-circle-left backFa"></i>
+        Retour
+      </a>
+
+      <a
+        v-if="files.length !== 0 && itemsBox[currentImg].fileIsDeleted !== 'deleted'"
+        class="navItem backBtn item7"
+        @click="deleteImg()"
+        v-model="itemsBox[currentImg].fileIsDeleted"
+      >
+        <i class="fas fa-skull-crossbones navFa"></i>
+        <span>
+          Supprimer cette image
+        </span>
+      </a>
+      <a
+        v-else-if="files.length !== 0 && itemsBox[currentImg].fileIsDeleted === 'deleted'"
+        class="navItem backBtn item7"
+        @click="deleteImg()"
+        v-model="itemsBox[currentImg].fileIsDeleted"
+      >
+        <i class="fas fa-skull-crossbones navFa"></i>
+        <span>
+          Récuperer l'image
+        </span>
+      </a>
+      <!-- LEFT NAV BUTON -->
+      <a
+        v-if="files.length !== 0"
+        class="arrowNavItem item4"
+        v-on:click="next(-1)"
+      >
+        <i class="fas fa-arrow-left  fa-3x"></i>
+      </a>
+      <!-- INDEX OF IMAGE -->
+      <a v-if="files.length !== 0" class="paginationNavItem item8">
+        {{ currentImg+1 }} / {{ files.length }}
+      </a>
+
+      <!-- ::::::::::::::::::::::::::::::: -->
+      <!-- :::::::::::::RIGHT::::::::::::: -->
+      <!-- ::::::::::::::::::::::::::::::: -->
+
+      <a
+        v-if="files.length !== 0 "
+        class="navItem right itemR1"
+        @click="onClickAddKeyword = !onClickAddKeyword"
+      >
+        Ajouter un diaporama
+      </a>
+      <newKeyWordComp
+        :isOpen.sync="onClickAddKeyword"
+        cssPosition="itemR1"
+        :sendToServer="true"
+        v-on:change=""
+      >
+      </newKeyWordComp>
+      <a
+        v-if="files.length !== 0"
+        class="arrowNavItem right itemR4"
+        v-on:click="next(1)"
+      >
+        <i class="fas fa-arrow-right  fa-3x"></i>
+      </a>
+
+      <a
+        v-if="files.length !== 0 && nbrImageLeft == 0"
+        class="submit navItem right itemR8"
+        @click="onClicPrepareDataBeforeSending"
+      >
+        <span>Enregistrer</span>
+      </a>
+      <a
+        v-else-if="files.length !== 0 && itemsBox[currentImg].keyword.length > 0"
+        class="submit navItem right itemR8"
+        @click="missingImgKeywordMsg"
+      >
+        Enregistrer ({{ nbrImageLeft }} images restantes)
+      </a>
+      <a
+        v-else-if="files.length !== 0"
+        class="submit navItem right itemR8"
+        @click=" $store.commit('msgToUsers', 'Chaque image doit être associé à au moins une image. Selectionnez un des mot-clefs présent sous l\'image ou créez-en un nouveau en cliquant sur le bouton ajouter un diaporama')"
+      >
+        Enregistrer ({{ nbrImageLeft }} images restantes)
+      </a>
+    </div>
+  </div>
+</section>
